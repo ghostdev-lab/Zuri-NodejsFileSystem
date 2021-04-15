@@ -16,11 +16,20 @@ fetch(url)
           to convert the json data gotten from the api to a string*/
         var jsondata = JSON.stringify(json, null, 2);
         
+        //To check if the folder exists
+        if(!fs.existsSync("result")){
+            //Used the make directory function (mkdir) to create a folder
+	        fs.mkdir("result", err => {
+                //If error occurs throw error on screen 
+                if (err) throw err;
+            })
+        }
+        
         //Used the writeFile function to write the json data to a new file
         fs.writeFile("./result/posts.json", jsondata , err => {
-            
             //If error occurs throw error on screen
             if (err) throw err;
             console.log("Done writing.")
         })
     })
+
